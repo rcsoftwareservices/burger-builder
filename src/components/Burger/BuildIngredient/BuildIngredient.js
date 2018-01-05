@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './Ingredient.css';
+import classes from './BuildIngredient.css';
 
-class Ingredient extends Component{
+class BuildIngredient extends Component{
     render () {
         let ingredient = null;
         switch (this.props.type) {
@@ -38,8 +38,8 @@ class Ingredient extends Component{
     }
 }
 
-Ingredient.propTypes = {
+BuildIngredient.propTypes = {
     type: PropTypes.string.isRequired
 };
 
-export default Ingredient;
+export default BuildIngredient;
