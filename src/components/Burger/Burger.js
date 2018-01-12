@@ -6,9 +6,9 @@ import Ingredient from './BuildIngredient/BuildIngredient';
 const burger = (props) => {
 
     let transformedIngredients = Object.keys(props.ingredients)
-        .map(igKey => {
-            return [...Array(props.ingredients[igKey])].map((_, i) => {
-                return <Ingredient key={igKey + i } type={igKey}/>
+        .map(key => {
+            return [...Array(props.ingredients[key])].map((_, i) => {
+                return <Ingredient key={key + i } type={key}/>
             });
         })
         .reduce((arr, el) => {
