@@ -5,8 +5,8 @@ import MenuItem from './NavMenuItem/NavMenuItem';
 
 const menu = () => (
     <ul className={classes.Menu}>
-        <MenuItem link="/" active>Burger Builder</MenuItem>
-        <MenuItem link="/">Checkout</MenuItem>
+        <MenuItem link="/" exact>Burger Builder</MenuItem>
+        <MenuItem link="/orders">Orders</MenuItem>
     </ul>
 );
 
