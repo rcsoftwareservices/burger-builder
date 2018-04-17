@@ -8,31 +8,17 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Wrapper from '../../hoc/Wrapper/Wrapper';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios-orders';
 import * as burgerBuilderActions from '../../store/actions/index';
+import axios from "../../axios-orders";
 
 class BurgerBuilder extends Component {
 
     state = {
         order: false,
-        loading: false,
-        error: false
     };
 
     componentDidMount() {
-        console.log(this.props);
-        // axios.get('https://react-my-burger-ad905.firebaseio.com/ingredients.json')
-        //     .then(response =>{
-        //         let ordered_ingredients = response.data.sort((a, b) => {
-        //             return a.order - b.order;
-        //         });
-        //         let ingredients = {};
-        //         ordered_ingredients.map(ingredient => ingredients[ingredient.name] = ingredient.quantity);
-        //         this.setState({ingredients: ingredients})
-        //     })
-        //     .catch(error => {
-        //         this.setState({error: true});
-        //     });
+        this.props.onInitIngredients();
     };
 
     updatePurchaseState(ingredients) {
@@ -66,7 +52,7 @@ class BurgerBuilder extends Component {
             disabled[key] = disabled[key] <= 0
         }
         let order_summary = null;
-        let burger = this.state.error ? <p>ERROR: Ingredients can't be loaded!</p> : <Spinner />;
+        let burger = this.props.error ? <p>ERROR: Ingredients can't be loaded!</p> : <Spinner />;
         if(this.props.ingredients) {
             burger = (
                 <Wrapper>
@@ -86,9 +72,6 @@ class BurgerBuilder extends Component {
                 cancelOrder={this.cancelOrderHandler}
                 continueOrder={this.continueOrderHandler} />;
         }
-        if(this.state.loading) {
-            order_summary = <Spinner />;
-        }
         return (
             <Wrapper>
                 <Modal show={this.state.order} modalClosed={this.cancelOrderHandler}>
@@ -103,14 +86,16 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        error: state.error
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onAddIngredient: (ingredientName) => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
-        onRemoveIngredient: (ingredientName) => dispatch(burgerBuilderActions.removeIngredient(ingredientName))
+        onRemoveIngredient: (ingredientName) => dispatch(burgerBuilderActions.removeIngredient(ingredientName)),
+        onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
     }
 };
 
