@@ -27,11 +27,16 @@ export const orderBurger = (orderData) => {
         dispatch(orderBurgerStart());
         axios.post('/orders.json', orderData)
         .then(response => {
-            console.log(response.data);
             dispatch(orderBurgerSuccess(response.data.name, orderData));
         })
         .catch(error => {
             dispatch(orderBurgerFailed(error));
         });
+    }
+};
+
+export const orderInit = () => {
+    return {
+        type: actionTypes.ORDER_INIT
     }
 };
