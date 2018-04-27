@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initialState = {
     orders: [],
@@ -10,47 +11,29 @@ const reducer = (state = initialState, action) => {
     switch (action.type)
     {
         case actionTypes.ORDER_INIT:
-            return {
-                ...state,
-                ordered: false
-            };
+            return updateObject(state, { ordered: false });
         case actionTypes.ORDER_BURGER_START:
-            return {
-                ...state,
-                loading: true
-            };
+            return updateObject(state, { loading: true });
         case actionTypes.ORDER_BURGER_SUCCESS:
-            const newOrder = {
-                ...action.orderData,
-                id: action.orderId
-            };
-            return {
-                ...state,
-                loading: false,
-                ordered: true,
-                orders: state.orders.concat(newOrder)
-            };
+            const newOrder = updateObject(action.orderData, { id: action.orderId });
+            return updateObject(state,
+                {
+                    loading: false,
+                    ordered: true,
+                    orders: state.orders.concat(newOrder)
+            });
         case actionTypes.ORDER_BURGER_FAILED:
-            return {
-                ...state,
-                loading: false
-            };
+            return updateObject(state, { loading: false });
         case actionTypes.FETCH_ORDERS_START:
-            return {
-                ...state,
-                loading: true
-            };
+            return updateObject(state, { loading: true });
         case actionTypes.FETCH_ORDERS_SUCCESS:
-            return {
-                ...state,
-                orders: action.orders,
-                loading: false
-            };
+            return updateObject(state,
+                {
+                    orders: action.orders,
+                    loading: false
+                });
         case actionTypes.FETCH_ORDERS_FAILED:
-            return {
-                ...state,
-                loading: false
-            };
+            return updateObject(state, { loading: false });
         default:
             return state;
     }
