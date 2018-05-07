@@ -3,11 +3,13 @@ import React from 'react';
 import classes from './NavMenu.css';
 import MenuItem from './NavMenuItem/NavMenuItem';
 
-const menu = () => (
+const menu = (props) => (
     <ul className={classes.Menu}>
         <MenuItem link="/" exact>Burger Builder</MenuItem>
         <MenuItem link="/orders">Orders</MenuItem>
-        <MenuItem link="/auth">Authenticate</MenuItem>
+        { props.isAuthenticated
+            ? <MenuItem link="/logout">Logout</MenuItem>
+            : <MenuItem link="/auth">Authenticate</MenuItem> }
     </ul>
 );
 
