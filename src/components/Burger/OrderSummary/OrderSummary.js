@@ -5,12 +5,6 @@ import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
 
-    // oculd leave as const
-
-    componentWillUpdate(){
-        console.log('[OrderSummar] WillUpdate');
-    }
-
     render () {
         const summary = Object.keys(this.props.ingredients)
             .map(key => {
