@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './NavMenuItem.css';
 
-const menuItem = (props) => (
+const navMenuItem = (props) => (
     <li className={classes.MenuItem}>
         <NavLink
             to={props.link}
@@ -12,4 +12,4 @@ const menuItem = (props) => (
     </li>
 );
 
-export default menuItem;
+export default navMenuItem;

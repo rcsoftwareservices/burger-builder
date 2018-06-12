@@ -1,17 +1,17 @@
 import React from 'react';
 
 import classes from './NavMenu.css';
-import MenuItem from './NavMenuItem/NavMenuItem';
+import NavMenuItem from './NavMenuItem/NavMenuItem';
 
 const menu = (props) => (
     <ul className={classes.Menu}>
-        <MenuItem link="/" exact>Burger Builder</MenuItem>
+        <NavMenuItem link="/" exact>Burger Builder</NavMenuItem>
         { props.isAuthenticated
-            ? <MenuItem link="/orders">Orders</MenuItem>
+            ? <NavMenuItem link="/orders">Orders</NavMenuItem>
             : null }
         { props.isAuthenticated
-            ? <MenuItem link="/logout">Logout</MenuItem>
-            : <MenuItem link="/auth">Authenticate</MenuItem> }
+            ? <NavMenuItem link="/logout">Logout</NavMenuItem>
+            : <NavMenuItem link="/auth">Authenticate</NavMenuItem> }
     </ul>
 );
 
